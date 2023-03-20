@@ -13,5 +13,7 @@ namespace BarberShop.Models
         public bool IsDeleted { get; set; }
         public Barber Barber { get; set; }
         public Customer Customer { get; set; }
+        public int BarberId { get; set; }
+        public int CustomerId { get; set; }
     }
 }

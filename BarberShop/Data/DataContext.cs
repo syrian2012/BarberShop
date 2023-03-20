@@ -15,5 +15,15 @@ namespace BarberShop.Data
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<BarberEmployee> BarberEmployees { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Reservation>()
+                .HasKey(r => new {r.BarberId,r.CustomerId });
+            modelBuilder.Entity<Reservation>()
+                .HasOne(b => b.Barber)
+                .WithMany(r => r.Reservations)
+                .HasForeignKey(c => c.CustomerId);
+        }
     }
 }
