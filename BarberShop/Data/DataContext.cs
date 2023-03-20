@@ -19,11 +19,18 @@ namespace BarberShop.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Reservation>()
-                .HasKey(r => new {r.BarberId,r.CustomerId });
+                .HasKey(r => new {r.ReservationId});
             modelBuilder.Entity<Reservation>()
                 .HasOne(b => b.Barber)
                 .WithMany(r => r.Reservations)
                 .HasForeignKey(c => c.CustomerId);
+
+            modelBuilder.Entity<BarberService>()
+                .HasKey(bs => new { bs.BarberId, bs.ServiceId });
+            modelBuilder.Entity<BarberService>()
+                .HasOne(b => b.Barber)
+                .WithMany(bs => bs.BarberServices)
+                .HasForeignKey(s => s.ServiceId);
         }
     }
 }

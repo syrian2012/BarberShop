@@ -1,6 +1,4 @@
-﻿using BarberShop.Enums;
-
-namespace BarberShop.Models
+﻿namespace BarberShop.Models
 {
     public class Barber : User
     {
@@ -10,6 +8,6 @@ namespace BarberShop.Models
         public int SubscriptionPeriod { get; set; }
         public ICollection<Reservation> Reservations { get; set; }
         public ICollection<BarberEmployee> BarberEmployees { get; set; }
-        public ICollection<Services> Services { get; set; }
+        public ICollection<BarberService> BarberServices { get; set; }
     }
 }
