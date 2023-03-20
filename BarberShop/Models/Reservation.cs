@@ -11,9 +11,9 @@ namespace BarberShop.Models
         public bool CustomerApprove { get; set; }
         public string DeletedBy { get; set; }
         public bool IsDeleted { get; set; }
-        public Barber Barber { get; set; }
-        public Customer Customer { get; set; }
         public int BarberId { get; set; }
+        public Barber Barber { get; set; }
         public int CustomerId { get; set; }
+        public Customer Customer { get; set; }        
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace BarberShop.Enums
 {
-    public enum Enums
+    public enum Services
     {
         HairCut,
         BeardCut,
