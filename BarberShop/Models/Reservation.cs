@@ -1,6 +1,4 @@
-﻿using System.Reflection.Metadata.Ecma335;
-
-namespace BarberShop.Models
+﻿namespace BarberShop.Models
 {
     public class Reservation : BaseEntity
     {
