@@ -4,5 +4,6 @@
     {
         public DateTime? DeleteTime { get; set; }
         public DateTime CreateTime { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

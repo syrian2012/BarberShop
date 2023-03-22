@@ -13,8 +13,10 @@ namespace BarberShop.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Barber> Barbers { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Service> Services { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<BarberEmployee> BarberEmployees { get; set; }
+        public DbSet<BarberService> BarberServices { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -24,13 +26,32 @@ namespace BarberShop.Data
                 .HasOne(b => b.Barber)
                 .WithMany(r => r.Reservations)
                 .HasForeignKey(c => c.CustomerId);
+            modelBuilder.Entity<Reservation>()
+                .HasOne(c => c.Customer)
+                .WithMany(r => r.Reservations)
+                .HasForeignKey(b => b.BarberId);
 
             modelBuilder.Entity<BarberService>()
-                .HasKey(bs => new { bs.BarberId, bs.ServiceId });
+                .HasKey(bs => new { bs.BarberServiceId });
             modelBuilder.Entity<BarberService>()
                 .HasOne(b => b.Barber)
                 .WithMany(bs => bs.BarberServices)
                 .HasForeignKey(s => s.ServiceId);
+            modelBuilder.Entity<BarberService>()
+                .HasOne(s => s.Service)
+                .WithMany(bs => bs.BarberServices)
+                .HasForeignKey(b => b.BarberId);
+
+            modelBuilder.Entity<ReservationService>()
+                .HasKey(rs => new { rs.ReservationId,rs.ServiceId});
+            modelBuilder.Entity<ReservationService>()
+                .HasOne(r => r.Reservation)
+                .WithMany(rs => rs.ReservationServices)
+                .HasForeignKey(s => s.ServiceId);
+            modelBuilder.Entity<ReservationService>()
+                .HasOne(s => s.BarberService)
+                .WithMany(rs => rs.ReservationServices)
+                .HasForeignKey(r => r.ReservationId);
         }
     }
 }
