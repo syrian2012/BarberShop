@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BarberShop.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreation : Migration
+    public partial class newCreation : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -87,14 +87,12 @@ namespace BarberShop.Migrations
                         name: "FK_BarberServices_Services_BarberId",
                         column: x => x.BarberId,
                         principalTable: "Services",
-                        principalColumn: "ServiceId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ServiceId");
                     table.ForeignKey(
                         name: "FK_BarberServices_Users_ServiceId",
                         column: x => x.ServiceId,
                         principalTable: "Users",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "UserId");
                 });
 
             migrationBuilder.CreateTable(
@@ -120,14 +118,12 @@ namespace BarberShop.Migrations
                         name: "FK_Reservations_Users_BarberId",
                         column: x => x.BarberId,
                         principalTable: "Users",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "UserId");
                     table.ForeignKey(
                         name: "FK_Reservations_Users_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "Users",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "UserId");
                 });
 
             migrationBuilder.CreateTable(
@@ -147,14 +143,12 @@ namespace BarberShop.Migrations
                         name: "FK_ReservationService_BarberServices_ReservationId",
                         column: x => x.ReservationId,
                         principalTable: "BarberServices",
-                        principalColumn: "BarberServiceId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "BarberServiceId");
                     table.ForeignKey(
                         name: "FK_ReservationService_Reservations_ServiceId",
                         column: x => x.ServiceId,
                         principalTable: "Reservations",
-                        principalColumn: "ReservationId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ReservationId");
                 });
 
             migrationBuilder.CreateIndex(

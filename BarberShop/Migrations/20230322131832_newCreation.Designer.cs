@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BarberShop.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230322130212_InitialCreation2")]
-    partial class InitialCreation2
+    [Migration("20230322131832_newCreation")]
+    partial class newCreation
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
