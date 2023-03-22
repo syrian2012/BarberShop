@@ -5,8 +5,7 @@ namespace BarberShop.Models
     public class Reservation : BaseEntity
     {
         public int ReservationId { get; set; }
-        public DateOnly ReservationDate { get; set; }
-        public TimeOnly ReservationTime { get; set; }
+        public DateTime ReservationDate { get; set; }
         public bool BarberApprove { get; set; }
         public bool CustomerApprove { get; set; }
         public string DeletedBy { get; set; }

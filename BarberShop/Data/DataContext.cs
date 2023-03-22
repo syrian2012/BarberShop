@@ -25,33 +25,42 @@ namespace BarberShop.Data
             modelBuilder.Entity<Reservation>()
                 .HasOne(b => b.Barber)
                 .WithMany(r => r.Reservations)
-                .HasForeignKey(c => c.CustomerId);
+                .HasForeignKey(c => c.CustomerId)
+                .OnDelete(DeleteBehavior.ClientNoAction);
             modelBuilder.Entity<Reservation>()
                 .HasOne(c => c.Customer)
                 .WithMany(r => r.Reservations)
-                .HasForeignKey(b => b.BarberId);
+                .HasForeignKey(b => b.BarberId)
+                .OnDelete(DeleteBehavior.ClientNoAction);
 
             modelBuilder.Entity<BarberService>()
                 .HasKey(bs => new { bs.BarberServiceId });
             modelBuilder.Entity<BarberService>()
                 .HasOne(b => b.Barber)
                 .WithMany(bs => bs.BarberServices)
-                .HasForeignKey(s => s.ServiceId);
+                .HasForeignKey(s => s.ServiceId)
+                .OnDelete(DeleteBehavior.ClientNoAction);
             modelBuilder.Entity<BarberService>()
                 .HasOne(s => s.Service)
                 .WithMany(bs => bs.BarberServices)
-                .HasForeignKey(b => b.BarberId);
+                .HasForeignKey(b => b.BarberId)
+                .OnDelete(DeleteBehavior.ClientNoAction);
 
             modelBuilder.Entity<ReservationService>()
                 .HasKey(rs => new { rs.ReservationId,rs.ServiceId});
             modelBuilder.Entity<ReservationService>()
                 .HasOne(r => r.Reservation)
                 .WithMany(rs => rs.ReservationServices)
-                .HasForeignKey(s => s.ServiceId);
+                .HasForeignKey(s => s.ServiceId)
+                .OnDelete(DeleteBehavior.ClientNoAction);
             modelBuilder.Entity<ReservationService>()
                 .HasOne(s => s.BarberService)
                 .WithMany(rs => rs.ReservationServices)
-                .HasForeignKey(r => r.ReservationId);
+                .HasForeignKey(r => r.ReservationId)
+                .OnDelete(DeleteBehavior.ClientNoAction);
+
+            modelBuilder.Entity<BarberEmployee>()
+                .HasKey(be => be.BarberEmpolyeeId);
         }
     }
 }
