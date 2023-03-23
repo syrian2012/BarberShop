@@ -86,5 +86,5 @@ namespace BarberShop.Controllers
             return Ok("Barber Activated Successfully");
         }
     }
-    }
+    
 }
