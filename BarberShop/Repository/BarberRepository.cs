@@ -14,9 +14,18 @@ namespace BarberShop.Repository
             _context = context;
         }
 
+        public bool ActiveBarber(int id, DateTime? date, int period)
+        {
+            var barber = GetBarber(id);
+            barber.SubscriptionDate = date;
+            barber.SubscriptionPeriod = period;
+            barber.IsActive = true;
+            return Save();
+        }
+
         public bool AddBarberEmployee(int barberId, string employeeName)
         {
-            var barber = _context.Barbers.Where(b => b.UserId == barberId).FirstOrDefault();
+            var barber = GetBarber(barberId);
             var barberEmployee = new BarberEmployee()
             {
                 Barber = barber,
@@ -39,8 +48,9 @@ namespace BarberShop.Repository
 
         public bool DeleteBarber(int id)
         {
-            var barber = _context.Barbers.Where(b => b.UserId == id).FirstOrDefault();
-            _context.Remove(barber);
+            var barber = GetBarber(id);
+            barber.DeleteTime = DateTime.Now;
+            barber.IsDeleted = true;
             return Save();
         }
 

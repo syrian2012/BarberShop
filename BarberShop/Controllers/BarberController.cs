@@ -30,6 +30,17 @@ namespace BarberShop.Controllers
             return Ok(barbers);
         }
 
+        [HttpGet("/originals")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<Barber>))]
+        public IActionResult GetBarbersOriginals()
+        {
+            var barbers = _barberRepository.GetBarbers().ToList();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(barbers);
+        }
+
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
@@ -54,5 +65,26 @@ namespace BarberShop.Controllers
 
             return Ok("Barber Created Successfully");
         }
+
+        [HttpPut("{barberId}/activate")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult ActivateBarber(int barberId, [FromQuery] int period , [FromQuery] DateTime date)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!_barberRepository.BarberExists(barberId))
+                return NotFound();
+
+            if (!_barberRepository.ActiveBarber(barberId, date, period))
+            {
+                ModelState.AddModelError("", "Some Thing Went Wrong While Activating Barber");
+                return StatusCode(500, ModelState);
+            }
+            return Ok("Barber Activated Successfully");
+        }
+    }
     }
 }
