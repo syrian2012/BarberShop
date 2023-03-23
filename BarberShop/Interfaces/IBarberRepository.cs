@@ -11,6 +11,7 @@ namespace BarberShop.Interfaces
         bool CeateBarber(Barber barber);
         bool DeleteBarber(int id);
         bool UpdateBarber(Barber barber);
+        bool AddBarberEmployee(int barberId, string employeeName);
         ICollection<BarberEmployee> GetEmployeesOfBarber(int id);
         ICollection<BarberService> GetBarberServices(int id);
         bool Save();
