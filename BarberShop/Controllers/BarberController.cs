@@ -42,6 +42,9 @@ namespace BarberShop.Controllers
                 return BadRequest(ModelState);
 
             var barberMap = _mapper.Map<Barber>(createBarber);
+            barberMap.CreateTime = DateTime.Now;
+            barberMap.IsDeleted = false;
+            barberMap.IsActive = false;
 
             if (!_barberRepository.CeateBarber(barberMap))
             {
