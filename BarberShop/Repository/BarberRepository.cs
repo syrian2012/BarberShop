@@ -41,6 +41,8 @@ namespace BarberShop.Repository
 
         public bool CeateBarber(Barber barber)
         {
+            if(_context.Users.Any(b => b.MobileNumber == barber.MobileNumber))
+                return false;
             _context.Add(barber);
             return Save();
         }
