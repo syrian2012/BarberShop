@@ -16,6 +16,8 @@ namespace BarberShop.Helpers
             CreateMap<Customer,CustomerGetDto>();
             CreateMap<CustomerCreateDto, Customer>();
             CreateMap<Customer,CustomerGetDto>();
+            CreateMap<BarberEmployeeCreateDto, BarberEmployee>();
+            CreateMap<BarberEmployee,BarberEmployeeCreateDto>();
         }
     }
 }

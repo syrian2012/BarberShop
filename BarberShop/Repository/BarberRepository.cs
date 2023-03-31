@@ -29,6 +29,8 @@ namespace BarberShop.Repository
             {
                 Barber = barber,
                 EmployeeName = employeeName,
+                CreateTime = DateTime.Now,
+                IsDeleted = false,
             };
             _context.Add(barberEmployee);
             return Save();

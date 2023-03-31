@@ -85,6 +85,27 @@ namespace BarberShop.Controllers
             }
             return Ok("Barber Activated Successfully");
         }
+
+        [HttpPost("{mobileNumber}/AddEmployee")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateBarberEmployee(string mobileNumber, [FromQuery] string employeeName)
+        {
+            if (employeeName == null)
+                return BadRequest(ModelState);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!_barberRepository.AddBarberEmployee(mobileNumber, employeeName))
+            {
+                ModelState.AddModelError("", "Some Thing Went Wrong While Saving Your Entry");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Empoloyee Added Successfully");
+        }
+
     }
     
 }
