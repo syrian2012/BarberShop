@@ -7,5 +7,7 @@ namespace BarberShop.Interfaces
         bool Login(string mobileNumber, string password);
         User GetUserByMobile(string mobileNumber);
         bool UserExists(string mobileNumber);
+        bool ActivateMobileNumber(string mobileNumber);
+        bool Save();
     }
 }

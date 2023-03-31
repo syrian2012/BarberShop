@@ -13,18 +13,18 @@ namespace BarberShop.Repository
             _context = context;
         }
 
-        public bool ActiveBarber(int id, DateTime? date, int period)
+        public bool ActiveateBarber(string mobileNumber, DateTime? date, int period)
         {
-            var barber = GetBarber(id);
+            var barber = GetBarber(mobileNumber);
             barber.SubscriptionDate = date;
             barber.SubscriptionPeriod = period;
             barber.IsActive = true;
             return Save();
         }
 
-        public bool AddBarberEmployee(int barberId, string employeeName)
+        public bool AddBarberEmployee(string mobileNumber, string employeeName)
         {
-            var barber = GetBarber(barberId);
+            var barber = GetBarber(mobileNumber);
             var barberEmployee = new BarberEmployee()
             {
                 Barber = barber,
@@ -34,12 +34,12 @@ namespace BarberShop.Repository
             return Save();
         }
 
-        public bool BarberExists(int id)
+        public bool BarberExists(string mobileNumber)
         {
-            return _context.Barbers.Any(b => b.UserId == id);
+            return _context.Barbers.Any(b => b.MobileNumber == mobileNumber);
         }
 
-        public bool CeateBarber(Barber barber)
+        public bool CreateBarber(Barber barber)
         {
             if(_context.Users.Any(b => b.MobileNumber == barber.MobileNumber))
                 return false;
@@ -47,17 +47,17 @@ namespace BarberShop.Repository
             return Save();
         }
 
-        public bool DeleteBarber(int id)
+        public bool DeleteBarber(string mobileNumber)
         {
-            var barber = GetBarber(id);
+            var barber = GetBarber(mobileNumber);
             barber.DeleteTime = DateTime.Now;
             barber.IsDeleted = true;
             return Save();
         }
 
-        public Barber GetBarber(int id)
+        public Barber GetBarber(string mobileNumber)
         {
-            return _context.Barbers.Where(b => b.UserId == id).FirstOrDefault();
+            return _context.Barbers.Where(b => b.MobileNumber == mobileNumber).FirstOrDefault();
         }
 
         public Barber GetBarberByReservation(int reservationId)
@@ -71,14 +71,15 @@ namespace BarberShop.Repository
             return _context.Barbers.ToList();
         }
 
-        public ICollection<BarberService> GetBarberServices(int id)
+        public ICollection<BarberService> GetBarberServices(string mobileNumber)
         {
-            return _context.BarberServices.Where(bs => bs.BarberId == id).ToList();
+            var barber = GetBarber(mobileNumber);
+            return _context.BarberServices.Where(bs => bs.BarberId == barber.UserId).ToList();
         }
 
-        public ICollection<BarberEmployee> GetEmployeesOfBarber(int id)
+        public ICollection<BarberEmployee> GetEmployeesOfBarber(string mobileNumber)
         {
-            var barber = _context.Barbers.Where(b => b.UserId == id).FirstOrDefault();
+            var barber = GetBarber(mobileNumber);
             return _context.BarberEmployees.Where(be => be.Barber == barber).ToList();
         }
 

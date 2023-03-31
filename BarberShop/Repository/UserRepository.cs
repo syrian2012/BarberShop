@@ -13,6 +13,13 @@ namespace BarberShop.Repository
             _context = context;
         }
 
+        public bool ActivateMobileNumber(string mobileNumber)
+        {
+            var user = GetUserByMobile(mobileNumber);
+            user.IsMobileVerfied = true;
+            return Save();
+        }
+
         public User GetUserByMobile(string mobileNumber)
         {
             return _context.Users.Where(u => u.MobileNumber == mobileNumber.Trim()).FirstOrDefault();
@@ -26,6 +33,12 @@ namespace BarberShop.Repository
             if (user.Password != password)
                 return false;
             return true;
+        }
+
+        public bool Save()
+        {
+            var saved = _context.SaveChanges();
+            return saved > 0 ? true : false;
         }
 
         public bool UserExists(string mobileNumber)

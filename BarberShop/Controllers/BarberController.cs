@@ -57,7 +57,7 @@ namespace BarberShop.Controllers
             barberMap.IsDeleted = false;
             barberMap.IsActive = false;
 
-            if (!_barberRepository.CeateBarber(barberMap))
+            if (!_barberRepository.CreateBarber(barberMap))
             {
                 ModelState.AddModelError("", "Some Thing Went Wrong While Saving Your Entry");
                 return StatusCode(500, ModelState);
@@ -66,19 +66,19 @@ namespace BarberShop.Controllers
             return Ok("Barber Created Successfully");
         }
 
-        [HttpPut("{barberId}/activate")]
+        [HttpPut("{mobileNumber}/activate")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
-        public IActionResult ActivateBarber(int barberId, [FromQuery] int period , [FromQuery] DateTime date)
+        public IActionResult ActivateBarber(string mobileNumber, [FromQuery] int period , [FromQuery] DateTime date)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            if (!_barberRepository.BarberExists(barberId))
+            if (!_barberRepository.BarberExists(mobileNumber))
                 return NotFound();
 
-            if (!_barberRepository.ActiveBarber(barberId, date, period))
+            if (!_barberRepository.ActiveateBarber(mobileNumber, date, period))
             {
                 ModelState.AddModelError("", "Some Thing Went Wrong While Activating Barber");
                 return StatusCode(500, ModelState);

@@ -5,16 +5,16 @@ namespace BarberShop.Interfaces
     public interface IBarberRepository
     {
         ICollection<Barber> GetBarbers();
-        Barber GetBarber(int id);
+        Barber GetBarber(string mobileNumber);
         Barber GetBarberByReservation(int reservationId);
-        bool BarberExists(int id);
-        bool CeateBarber(Barber barber);
-        bool ActiveBarber(int id,DateTime? date,int period);
-        bool DeleteBarber(int id);
+        bool BarberExists(string mobileNumber);
+        bool CreateBarber(Barber barber);
+        bool ActiveateBarber(string mobileNumber, DateTime? date,int period);
+        bool DeleteBarber(string mobileNumber);
         bool UpdateBarber(Barber barber);
-        bool AddBarberEmployee(int barberId, string employeeName);
-        ICollection<BarberEmployee> GetEmployeesOfBarber(int id);
-        ICollection<BarberService> GetBarberServices(int id);
+        bool AddBarberEmployee(string mobileNumber, string employeeName);
+        ICollection<BarberEmployee> GetEmployeesOfBarber(string mobileNumber);
+        ICollection<BarberService> GetBarberServices(string mobileNumber);
         bool Save();
     }
 }
