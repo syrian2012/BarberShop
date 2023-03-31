@@ -11,6 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IBarberRepository,BarberRepository>();
 builder.Services.AddScoped<IUserRepository,UserRepository>();
+builder.Services.AddScoped<ICustomerRepository,CustomerRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

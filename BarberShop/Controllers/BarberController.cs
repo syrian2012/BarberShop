@@ -30,7 +30,7 @@ namespace BarberShop.Controllers
             return Ok(barbers);
         }
 
-        [HttpGet("/originals")]
+        [HttpGet("/Barbers")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Barber>))]
         public IActionResult GetBarbersOriginals()
         {
