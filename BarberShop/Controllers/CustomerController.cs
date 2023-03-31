@@ -24,7 +24,7 @@ namespace BarberShop.Controllers
         [ProducesResponseType(200, Type = typeof(IEnumerable<Customer>))]
         public IActionResult GetCustomers()
         {
-            var customers = _mapper.Map<List<BarberGetDto>>(_customerRepository.GetCustomers().ToList());
+            var customers = _mapper.Map<List<CustomerGetDto>>(_customerRepository.GetCustomers().ToList());
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
