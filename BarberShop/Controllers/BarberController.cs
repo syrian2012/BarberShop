@@ -106,6 +106,20 @@ namespace BarberShop.Controllers
             return Ok("Empoloyee Added Successfully");
         }
 
+        [HttpGet("{mobileNumber}/Employees")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<BarberEmployee>))]
+        public IActionResult GetBarberEmployees(string mobileNumber)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!_barberRepository.BarberExists(mobileNumber))
+                return NotFound();
+
+            var barberEmployees = _barberRepository.GetEmployeesOfBarber(mobileNumber);
+
+            return Ok(barberEmployees);
+        }
     }
     
 }
