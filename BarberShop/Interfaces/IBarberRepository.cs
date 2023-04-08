@@ -16,5 +16,6 @@ namespace BarberShop.Interfaces
         ICollection<BarberEmployee> GetEmployeesOfBarber(string mobileNumber);
         ICollection<BarberService> GetBarberServices(string mobileNumber);
         bool Save();
+        bool AddBarberService(BarberService barberService);
     }
 }

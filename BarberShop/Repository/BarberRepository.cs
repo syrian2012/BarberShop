@@ -36,6 +36,12 @@ namespace BarberShop.Repository
             return Save();
         }
 
+        public bool AddBarberService(BarberService barberService)
+        {
+            _context.Add(barberService);
+            return Save();
+        }
+
         public bool BarberExists(string mobileNumber)
         {
             return _context.Barbers.Any(b => b.MobileNumber == mobileNumber);
